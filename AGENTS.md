@@ -1,8 +1,11 @@
 # AGENTS.md — cmdk-vectorized-cli
 
-Node CLI and library for **intent maps** used with `cmdk-vectorized`.
+Node CLI and library for **self-hosted intent maps** used with `cmdk-vectorized`.
 
-Not the React palette. Do not add client hooks, `cmdk` UI, or search handlers here.
+Not the React palette and not the hosted SupaSearch CLI. Do not add SupaSearch
+API keys, hosted ingest routes, dashboard behavior, client hooks, `cmdk` UI, or
+search handlers here. Hosted workflows belong to `cmdk-saas/packages/cli` and
+the published `supasearch` command.
 
 ## Commands
 

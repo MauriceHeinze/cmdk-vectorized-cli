@@ -1,8 +1,12 @@
 # cmdk-vectorized-cli
 
-Intent-map CLI for [cmdk-vectorized](https://github.com/MauriceHeinze/cmdk-vectorized). Validates `public/intent-map.json`, installs coding-agent skills, and uploads intents to Weaviate.
+Self-hosted intent-map CLI for [cmdk-vectorized](https://github.com/MauriceHeinze/cmdk-vectorized). It validates `public/intent-map.json`, installs coding-agent skills, and uploads directly to a Weaviate cluster you operate.
 
-This is not the React palette. Runtime search stays in `cmdk-vectorized`.
+This is not the React palette and it does not call the hosted SupaSearch API.
+Runtime search stays in `cmdk-vectorized`.
+
+For hosted multi-tenant search, API keys, dashboard editing, and SupaSearch
+ingestion, use [`supasearch`](../cmdk-saas/packages/cli/README.md) instead.
 
 ## Install
 
@@ -30,7 +34,8 @@ WEAVIATE_URL="..." WEAVIATE_API_KEY="..." npx cmdk-vectorized-cli upload
 | `init` | Install the intent-map generator skill; produces `public/intent-map.json` |
 | `upload` | Validate `public/intent-map.json`, write `public/intent-map.csv`, upload to Weaviate |
 
-`upload` requires `WEAVIATE_URL` and `WEAVIATE_API_KEY`.
+`upload` requires `WEAVIATE_URL` and `WEAVIATE_API_KEY` for your own cluster.
+SupaSearch credentials are intentionally unsupported here.
 
 ## Programmatic API
 

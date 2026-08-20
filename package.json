@@ -1,7 +1,7 @@
 {
   "name": "cmdk-vectorized-cli",
   "version": "0.1.0",
-  "description": "CLI for cmdk-vectorized: intent-map validation, agent skills, and Weaviate upload.",
+  "description": "Self-hosted cmdk-vectorized CLI for intent validation, agent skills, and direct Weaviate upload.",
   "type": "module",
   "bin": {
     "cmdk-vectorized-cli": "dist/cli.js"
