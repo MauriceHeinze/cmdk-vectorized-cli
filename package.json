@@ -1,0 +1,63 @@
+{
+  "name": "cmdk-vectorized-cli",
+  "version": "0.1.0",
+  "description": "CLI for cmdk-vectorized: intent-map validation, agent skills, and Weaviate upload.",
+  "type": "module",
+  "bin": {
+    "cmdk-vectorized-cli": "dist/cli.js"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "homepage": "https://github.com/MauriceHeinze/cmdk-vectorized-cli#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MauriceHeinze/cmdk-vectorized-cli.git"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@10.12.4",
+  "keywords": [
+    "cmdk",
+    "cmdk-vectorized",
+    "command-palette",
+    "intent-map",
+    "weaviate",
+    "cli"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "AGENTS.md",
+    "skills"
+  ],
+  "scripts": {
+    "build": "tsup && tsc --emitDeclarationOnly --outDir dist",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --environment node",
+    "lint": "eslint src",
+    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.12.3",
+    "eslint": "^10.3.0",
+    "globals": "^17.6.0",
+    "tsup": "^8.5.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.59.2",
+    "vitest": "^3.2.4"
+  }
+}
