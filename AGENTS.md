@@ -31,13 +31,16 @@ import {
 ## Layout
 
 ```txt
-src/cli.ts                 npx entry (init / integrate / upload)
-src/intent-map.ts          read + validate public/intent-map.json
-src/csv.ts                 CSV export
-src/weaviate.ts            CmdkIntent schema + batch upload
-src/workflows.ts           write agent skill files
-src/workflow-templates.ts  skill bodies
+skills/cmdk-intent-map-generator/SKILL.md  init skill (intent map)
+skills/cmdk-vectorized-integrator/SKILL.md integrate skill
+src/cli.ts                                 npx entry (init / integrate / upload)
+src/intent-map.ts                          read + validate public/intent-map.json
+src/csv.ts                                 CSV export
+src/weaviate.ts                            CmdkIntent schema + batch upload
+src/workflows.ts                           install the files from skills/
 ```
+
+Skill markdown in `skills/` is the source of truth. `init` / `integrate` import those files and write them into the consumer app. Do not duplicate skill bodies in TypeScript.
 
 ## Constraints
 

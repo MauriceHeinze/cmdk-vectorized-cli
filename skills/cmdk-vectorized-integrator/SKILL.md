@@ -1,5 +1,5 @@
 ---
-name: cmdk-vectorized-integrate
+name: cmdk-vectorized-integrator
 description: Integrate cmdk-vectorized search and optional speech input into a React command palette.
 ---
 
@@ -15,7 +15,7 @@ Wire vector search into a React command palette. Ranking comes from a search end
 ## Integration
 
 1. Install cmdk-vectorized, cmdk, react, and react-dom.
-2. Point endpoint at SupaSearch with a publishable Bearer key, or implement GET /api/command-search with createCommandSearchHandler from cmdk-vectorized/search-handler.
+2. Implement GET /api/command-search with createCommandSearchHandler from cmdk-vectorized/search-handler, backed by the Weaviate cluster this CLI uploads to. Point the palette `endpoint` at that route. Keep Weaviate credentials server-side.
 3. Pass app-owned navigate and actions handlers.
 4. Set shouldFilter={false} on custom Command components so cmdk preserves vector ranking.
 5. Add useCommandVoice only when browser speech input is wanted.

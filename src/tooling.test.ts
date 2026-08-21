@@ -83,12 +83,20 @@ describe("installAgentWorkflows", () => {
     const written = await installAgentWorkflows({ cwd });
 
     expect(written).toEqual([
-      join(".codex", "skills", "cmdk-vectorized", "SKILL.md"),
-      join(".opencode", "skill", "cmdk-vectorized", "SKILL.md"),
-      join(".claude", "commands", "cmdk-vectorized.md"),
+      join(".codex", "skills", "cmdk-intent-map-generator", "SKILL.md"),
+      join(".opencode", "skills", "cmdk-intent-map-generator", "SKILL.md"),
+      join(".claude", "commands", "cmdk-intent-map-generator.md"),
     ]);
 
-    const codexSkill = await readFile(join(cwd, ".codex", "skills", "cmdk-vectorized", "SKILL.md"), "utf8");
+    const codexSkill = await readFile(
+      join(cwd, ".codex", "skills", "cmdk-intent-map-generator", "SKILL.md"),
+      "utf8",
+    );
+    const shippedSkill = await readFile(
+      join(process.cwd(), "skills", "cmdk-intent-map-generator", "SKILL.md"),
+      "utf8",
+    );
+    expect(codexSkill).toBe(shippedSkill);
     expect(codexSkill).toContain("public/intent-map.json");
     expect(codexSkill).toContain("Do not create llms.txt files.");
   });
@@ -100,23 +108,34 @@ describe("installIntegrationSkill", () => {
     const written = await installIntegrationSkill({ cwd });
 
     expect(written).toEqual([
-      join(".codex", "skills", "cmdk-vectorized-integrate", "SKILL.md"),
-      join(".opencode", "skill", "cmdk-vectorized-integrate", "SKILL.md"),
-      join(".claude", "commands", "cmdk-vectorized-integrate.md"),
+      join(".codex", "skills", "cmdk-vectorized-integrator", "SKILL.md"),
+      join(".opencode", "skills", "cmdk-vectorized-integrator", "SKILL.md"),
+      join(".claude", "commands", "cmdk-vectorized-integrator.md"),
     ]);
 
     const codexSkill = await readFile(
-      join(cwd, ".codex", "skills", "cmdk-vectorized-integrate", "SKILL.md"),
+      join(cwd, ".codex", "skills", "cmdk-vectorized-integrator", "SKILL.md"),
       "utf8",
     );
     const shippedSkill = await readFile(
-      join(process.cwd(), "skills", "cmdk-vectorized-integrate", "SKILL.md"),
+      join(process.cwd(), "skills", "cmdk-vectorized-integrator", "SKILL.md"),
       "utf8",
     );
     expect(codexSkill).toBe(shippedSkill);
     expect(codexSkill).toContain("vector search");
     expect(codexSkill).toContain("shouldFilter={false}");
     expect(codexSkill).toContain("generate llms.txt files");
+    expect(codexSkill).toContain("createCommandSearchHandler");
+    expect(codexSkill).toContain("Weaviate cluster this CLI uploads to");
+    expect(codexSkill).not.toContain("publishable Bearer key");
+    expect(codexSkill).not.toContain("Point endpoint at SupaSearch");
+
+    const claudeSkill = await readFile(
+      join(cwd, ".claude", "commands", "cmdk-vectorized-integrator.md"),
+      "utf8",
+    );
+    expect(claudeSkill).toBe(shippedSkill.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n*/, ""));
+    expect(claudeSkill.startsWith("# cmdk-vectorized Integration")).toBe(true);
   });
 });
 
